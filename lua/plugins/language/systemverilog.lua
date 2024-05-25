@@ -27,6 +27,7 @@ function systemverilog.setupLinter(lint)
     "-Irtl/include",
     '-f',
     vim.fs.find('verilator.f', {upward = true, stop = '/home'})[1],
+    }
 
 
   lint.linters.verilator = verilator
