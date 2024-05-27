@@ -71,3 +71,6 @@ vim.cmd 'colorscheme habamax'
 
 -- Enable hihglight search matches
 vim.opt.hlsearch = true
+
+-- Change default netrw copy command
+vim.g.netrw_localcopydircmd = 'cp -r'

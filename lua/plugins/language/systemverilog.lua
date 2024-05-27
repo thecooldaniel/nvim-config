@@ -24,9 +24,8 @@ function systemverilog.setupLinter(lint)
     "--bbox-sys",
     "--bbox-unsup",
     "--lint-only",
-    "-Irtl/include",
     '-f',
-    vim.fs.find('verilator.f', {upward = true, stop = '/home'})[1],
+    vim.fs.find('verilator.f', {upward = true, stop = vim.env.HOME})[1],
     }
 
 
