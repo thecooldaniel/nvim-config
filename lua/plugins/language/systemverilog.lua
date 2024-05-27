@@ -5,8 +5,8 @@ function systemverilog.setupLsp()
       -- cmd = { 'verible-verilog-ls', '--rules_config_search' },
       cmd = { 'verible-verilog-ls' },
       root_dir = require('lspconfig').util.root_pattern({'.git', 'verilator.f'}),
-      -- capabilities = capabilities,
       format_on_save = true,
+      capabilites = require'cmp_nvim_lsp'.default_capabilities(),
     })
 end
 
@@ -37,7 +37,7 @@ end
 
 function systemverilog.setupTreesitter(opts)
   table.insert(opts.ensure_installed, 'verilog')
-  table.insert(opts.highlight.disable, {'verilog', 'systemverilog'})
+  -- table.insert(opts.highlight.disable, {'verilog', 'systemverilog'})
 end
 
 
