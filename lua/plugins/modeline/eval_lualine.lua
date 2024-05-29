@@ -39,6 +39,7 @@ local config = {
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
+    globalstatus = false,
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
@@ -57,15 +58,15 @@ local config = {
     lualine_c = {},
     lualine_x = {},
   },
-  inactive_sections = {
-    -- these are to remove the defaults
-    lualine_a = {},
-    lualine_b = {},
-    lualine_y = {},
-    lualine_z = {},
-    lualine_c = {},
-    lualine_x = {},
-  },
+  -- inactive_sections = {
+  --   -- these are to remove the defaults
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_y = {},
+  --   lualine_z = {},
+  --   lualine_c = {},
+  --   lualine_x = {},
+  -- },
 }
 
 -- Inserts a component in lualine_c at left section
@@ -78,46 +79,47 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
-ins_left {
-  function()
-    return '▊'
-  end,
-  color = { fg = colors.blue }, -- Sets highlighting of component
-  padding = { left = 0, right = 1 }, -- We don't need space before this
+-- auto change color according to neovims mode
+local mode_color = {
+  n = colors.red,
+  i = colors.green,
+  v = colors.blue,
+  [''] = colors.blue,
+  V = colors.blue,
+  c = colors.magenta,
+  no = colors.red,
+  s = colors.orange,
+  S = colors.orange,
+  [''] = colors.orange,
+  ic = colors.yellow,
+  R = colors.violet,
+  Rv = colors.violet,
+  cv = colors.red,
+  ce = colors.red,
+  r = colors.cyan,
+  rm = colors.cyan,
+  ['r?'] = colors.cyan,
+  ['!'] = colors.red,
+  t = colors.red,
 }
+-- ins_left {
+--   function()
+--     return '▊'
+--   end,
+--   color = { fg = colors.blue }, -- Sets highlighting of component
+--   padding = { left = 0, right = 0 }, -- We don't need space before this
+-- }
 
 ins_left {
   -- mode component
-  function()
-    return ''
-  end,
+  -- function()
+  --   return ''
+  -- end,
+  'mode',
   color = function()
-    -- auto change color according to neovims mode
-    local mode_color = {
-      n = colors.red,
-      i = colors.green,
-      v = colors.blue,
-      [''] = colors.blue,
-      V = colors.blue,
-      c = colors.magenta,
-      no = colors.red,
-      s = colors.orange,
-      S = colors.orange,
-      [''] = colors.orange,
-      ic = colors.yellow,
-      R = colors.violet,
-      Rv = colors.violet,
-      cv = colors.red,
-      ce = colors.red,
-      r = colors.cyan,
-      rm = colors.cyan,
-      ['r?'] = colors.cyan,
-      ['!'] = colors.red,
-      t = colors.red,
-    }
-    return { fg = mode_color[vim.fn.mode()] }
+    return { bg = mode_color[vim.fn.mode()], fg = colors.bg }
   end,
-  padding = { right = 1 },
+  padding = { right = 1, left = 2 },
 }
 
 ins_left {
@@ -172,7 +174,7 @@ ins_left {
     end
     return msg
   end,
-  icon = ' LSP:',
+  icon = '',
   color = { fg = '#ffffff', gui = 'bold' },
 }
 
@@ -209,13 +211,13 @@ ins_right {
   cond = conditions.hide_in_width,
 }
 
-ins_right {
-  function()
-    return '▊'
-  end,
-  color = { fg = colors.blue },
-  padding = { left = 1 },
-}
+-- ins_right {
+--   function()
+--     return '▊'
+--   end,
+--   color = { fg = colors.blue },
+--   padding = { left = 1 },
+-- }
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)
