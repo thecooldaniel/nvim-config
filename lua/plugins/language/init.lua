@@ -112,8 +112,26 @@ return {
     end,
   },
   {
+    -- "williamboman/mason.nvim",
+    -- "williamboman/mason-lspconfig.nvim",
     'neovim/nvim-lspconfig',
+    dependencies = {
+      -- Automatically install LSPs and related tools to stdpath for Neovim
+      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP.
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', opts = {} },
+
+      -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
+      -- used for completion, annotations and signatures of Neovim apis
+      { 'folke/neodev.nvim', opts = {} },
+    },
     config = function()
+      -- require("mason").setup()
+      -- require("mason-lspconfig").setup()
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -208,9 +226,44 @@ return {
         end,
       })
 
-      -- Include languages here
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+      local servers = {
+        verible = require('plugins.language.systemverilog').setupLsp(),
+        lua_ls = {
+          -- cmd = {...},
+          -- filetypes = { ...},
+          -- capabilities = {},
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+      }
+
+      -- Setup verible outside of Mason
       require('plugins.language.systemverilog').setupLsp()
 
+      require'mason'.setup()
+
+      require('mason-lspconfig').setup {
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            -- This handles overriding only values explicitly passed
+            -- by the server configuration above. Useful when disabling
+            -- certain features of an LSP (for example, turning off formatting for tsserver)
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
+          end,
+        },
+      }
     end,
   },
 
@@ -222,19 +275,19 @@ return {
       'BufReadPre',
       'BufNewFile',
       'BufWritePost',
-      'TextChanged', 
+      'TextChanged',
       'InsertLeave'
     },
     config = function()
       local lint = require 'lint'
 
       -- Include languages here
-      require('plugins.language.systemverilog').setupLinter(lint)
 
       vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'TextChanged', 'InsertLeave' }, {
         group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
         callback = function()
           vim.defer_fn(function()
+            require('plugins.language.systemverilog').setupLinter(lint)
             lint.try_lint()
           end, 1)
         end,
@@ -284,8 +337,6 @@ return {
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
-
-
   -- Trouble
   {
     'folke/trouble.nvim',
@@ -323,5 +374,7 @@ return {
       },
     },
     opts = {}, -- for default options, refer to the configuration section for custom setup.
-  }
+  },
+
+
 }
