@@ -18,6 +18,8 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -28,3 +30,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<F12>', ':FloatermToggle<CR>', {desc = 'Toggle Floaterm'})
 vim.keymap.set('n', '<F11>', ':FloatermNew --disposable --autoclose=2 lazygit<CR>')
 vim.keymap.set('n', '<F10>', ':FloatermKill<CR>')
+
+-- Custom
+vim.keymap.set('n', '<C-x><C-s>', ':w<CR>', {desc = 'Save buffer'})
+vim.keymap.set('n', '<leader>llc', ':lua =require(\'lint\').linters<CR>', { desc = '[L]inter [C]onfig' })
+

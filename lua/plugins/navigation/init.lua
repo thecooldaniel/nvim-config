@@ -18,6 +18,7 @@ return {
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = '[L]anguage', _ = 'which_key_ignore'},
       }
       -- visual mode
       require('which-key').register({
@@ -28,7 +29,7 @@ return {
   },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' },
     config = function()
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -36,8 +37,37 @@ return {
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-      require'telescope'.setup()
+      require'telescope'.setup({
+        extensions = {
+          ["ui-select"] = { require'telescope.themes'.get_dropdown() }
+        }
+      })
+
+      require'telescope'.load_extension'ui-select'
     end
-  }
+  },
+  {
+    'Shatur/neovim-session-manager',
+    dependencies = {'nvim-lua/plenary.nvim'},
+    config = function()
+      -- local Path = require('plenary.path')
+      -- local config = require('session_manager.config')
+      -- require('session_manager').setup()
+    end
+  },
+  {
+    'akinsho/bufferline.nvim', 
+    version = "*", 
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("bufferline").setup{
+        options = {
+          separator_style = 'slant',
+          mode = 'tabs',
+        }
+      }
+    end,
+  },
+
 }
 
