@@ -124,12 +124,14 @@ ins_left {
 
 ins_left {
   -- filesize component
-  'filesize',
-  cond = conditions.buffer_not_empty,
+  -- 'filesize',
+  '%-01.4n', -- 0: remove leading 0s, 1: minwidth, 4: maxwidth, n: buffer number
+  -- cond = conditions.buffer_not_empty,
 }
 
 ins_left {
   'filename',
+  path = 4,
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, gui = 'bold' },
 }
