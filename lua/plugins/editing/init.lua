@@ -1,7 +1,13 @@
 return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
+  -- align text
+  { 'echasnovski/mini.align',
+    version = '*',
+    config = function()
+      require('mini.align').setup()
+    end
+  },
   -- Detect tabstop/shiftwidth automatically
   'tpope/vim-sleuth',
   {
@@ -18,4 +24,6 @@ return {
     end,
   },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  {
+    'mg979/vim-visual-multi', branch = 'master'}
 }
