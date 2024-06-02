@@ -42,7 +42,7 @@ end
 
 function systemverilog.setupTreesitter(opts)
   table.insert(opts.ensure_installed, 'verilog')
-  -- table.insert(opts.highlight.disable, {'verilog', 'systemverilog'})
+  table.insert(opts.highlight.disable, {'verilog', 'systemverilog'})
 end
 
 
