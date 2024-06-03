@@ -24,6 +24,6 @@ return {
     end,
   },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-  {
-    'mg979/vim-visual-multi', branch = 'master'}
+  { 'mg979/vim-visual-multi', branch = 'master'},
+  { 'tpope/vim-surround' },
 }
