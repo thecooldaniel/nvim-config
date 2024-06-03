@@ -54,3 +54,8 @@ require("lazy").setup(
     },
   }
 )
+
+-- #################################
+-- AFTER-PLUGIN SETTINGS
+-- #################################
+require'settings.after-plugins'

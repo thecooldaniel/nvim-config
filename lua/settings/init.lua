@@ -63,8 +63,8 @@ vim.opt.scrolloff = 5
 -- Enable true color mode
 vim.opt.termguicolors = true
 
--- Set default colorscheme (overwritten in colorscheme\init.lua)
-vim.cmd 'colorscheme habamax'
+-- Set default colorscheme
+-- Moved to after-plugins.lua
 
 -- Change CWD to buffer's parent dir.
 -- vim.opt.autochdir = true
