@@ -75,6 +75,8 @@ vim.opt.hlsearch = true
 -- Change default netrw copy command
 vim.g.netrw_localcopydircmd = 'cp -r'
 
+vim.opt.laststatus = 3
+
 
 -- Session options
 vim.o.sessionoptions="blank,curdir,folds,tabpages,terminal,winpos,winsize"

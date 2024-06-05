@@ -119,6 +119,8 @@ return {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
+      "mfussenegger/nvim-dap",
+      "jay-babu/mason-nvim-dap.nvim",
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -251,6 +253,7 @@ return {
       require('plugins.language.systemverilog').setupLsp()
 
       require'mason'.setup()
+      require("mason-nvim-dap").setup()
 
       require('mason-lspconfig').setup {
         handlers = {
