@@ -4,7 +4,7 @@ return {
     config = function()
       local setup = {
         terminal_background = true,
-        filter = "octagon"
+        filter = "spectrum"
       }
       -- require("monokai-pro").setup(setup)
       -- vim.cmd 'colorscheme monokai-pro'
@@ -61,5 +61,8 @@ return {
     opts = {
       style = 'night'
     },
+  },
+  {
+    'Mofiqul/vscode.nvim'
   }
 }

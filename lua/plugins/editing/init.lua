@@ -26,4 +26,23 @@ return {
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   { 'mg979/vim-visual-multi', branch = 'master'},
   { 'tpope/vim-surround' },
+  -- {
+  --   'Bekaboo/dropbar.nvim',
+  --   -- optional, but required for fuzzy finder support
+  --   dependencies = {
+  --     'nvim-telescope/telescope-fzf-native.nvim'
+  --   }
+  -- },
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      -- configurations go here
+    },
+  }
 }
