@@ -317,7 +317,13 @@ return {
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      incremental_selection = { enable = true },
+      incremental_selection = { 
+        enable = true,
+        keymaps = {
+          node_incremental = "v",
+          node_decremental = "V"
+        },
+      },
       textobjects = { enable = true},
       indent = { enable = true, disable = { 'ruby' }},
     },
