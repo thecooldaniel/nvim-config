@@ -1,6 +1,7 @@
 -- Set colorscheme
+vim.o.background = "dark"
 local colorscheme_fallback = "habamax"
-local colorscheme = "tokyonight"
+local colorscheme = "nightfly"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
