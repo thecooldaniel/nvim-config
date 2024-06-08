@@ -42,7 +42,7 @@ return {
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
       vim.keymap.set('n', '<leader>fd', function() require("telescope").extensions.file_browser.file_browser() end, {})
-
+      vim.keymap.set('n', '<leader>wc', function() builtin.colorscheme({enable_preview = true}) end, {})
       require'telescope'.setup({
         extensions = {
           ["ui-select"] = { require'telescope.themes'.get_dropdown() },
@@ -78,7 +78,7 @@ return {
     config = function()
       require("bufferline").setup{
         options = {
-          separator_style = 'slant',
+          -- separator_style = 'slant',
           mode = 'tabs',
         }
       }
