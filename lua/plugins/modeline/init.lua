@@ -5,7 +5,7 @@ return {
     config = function()
           -- require'plugins.modeline.eval_lualine'
       local lualine_config = require('lualine').get_config()
-      lualine_config.options.theme = require'lualine.themes.ayu_dark'
+      lualine_config.options.theme = require'lualine.themes.nightfly'
       lualine_config.options.theme.inactive = lualine_config.options.theme.normal
 
       lualine_config.sections.lualine_c = {
