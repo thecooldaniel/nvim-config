@@ -64,5 +64,25 @@ return {
   },
   {
     'Mofiqul/vscode.nvim'
-  }
+  },
+  { "rose-pine/neovim", name = "rose-pine" },
+  { "catppuccin/nvim", name = "catppuccin" },
+  {
+    "diegoulloao/neofusion.nvim",
+    config = function()
+      require('neofusion').setup({
+        transparent_mode = true
+      })
+    end
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    config = function ()
+      require'cyberdream'.setup{
+        transparent = true
+      }
+    end
+    -- lazy = false,
+    -- priority = 1000,
+  },
 }
