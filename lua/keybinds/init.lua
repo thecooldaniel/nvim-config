@@ -26,7 +26,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Floatterm
 vim.keymap.set('n', '<F12>', ':FloatermToggle<CR>', {desc = 'Toggle Floaterm'})
-vim.keymap.set('n', '<F11>', ':FloatermNew --disposable --autoclose=2 lazygit<CR>')
+vim.keymap.set('n', '<F9>', ':FloatermNew --disposable --autoclose=2 lazygit<CR>')
 vim.keymap.set('n', '<F10>', ':FloatermKill<CR>')
 
 -- Custom
