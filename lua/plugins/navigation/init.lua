@@ -71,19 +71,71 @@ return {
       -- require('session_manager').setup()
     end
   },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   version = "*",
+  --   dependencies = 'nvim-tree/nvim-web-devicons',
+  --   config = function()
+  --     require("bufferline").setup{
+  --       options = {
+  --         -- separator_style = 'slant',
+  --         mode = 'tabs',
+  --       }
+  --     }
+  --   end,
+  -- },
   {
-    'akinsho/bufferline.nvim',
-    version = "*",
+    'nanozuki/tabby.nvim',
+    -- event = 'VimEnter', -- if you want lazy load, see below
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require("bufferline").setup{
-        options = {
-          -- separator_style = 'slant',
-          mode = 'tabs',
-        }
+
+      local theme = {
+        current = { fg = "#cad3f5", bg = "transparent", style = "bold" },
+        not_current = { fg = "#5b6078", bg = "transparent" },
+
+        fill = { bg = "transparent" },
       }
+      require("tabby.tabline").set(function(line)
+        return {
+          line.tabs().foreach(function(tab)
+            local hl = tab.is_current() and theme.current or theme.not_current
+            return {
+              line.sep(" ", hl, theme.fill),
+              tab.name(),
+              line.sep(" ", hl, theme.fill),
+              hl = hl,
+            }
+          end),
+          line.spacer(),
+          line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+            local hl = win.is_current() and theme.current or theme.not_current
+
+            return {
+              line.sep(" ", hl, theme.fill),
+              win.buf_name(),
+              line.sep(" ", hl, theme.fill),
+              hl = hl,
+            }
+          end),
+          hl = theme.fill,
+        }
+      end)
     end,
   },
-
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  }
 }
 
