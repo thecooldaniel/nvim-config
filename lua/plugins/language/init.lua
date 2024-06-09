@@ -104,6 +104,7 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
+          { name = 'orgmode' },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'buffer' },
@@ -250,7 +251,7 @@ return {
       }
 
       -- Setup verible outside of Mason
-      require('plugins.language.systemverilog').setupLsp()
+      -- require('plugins.language.systemverilog').setupLsp()
 
       require'mason'.setup()
       require("mason-nvim-dap").setup()
@@ -317,7 +318,7 @@ return {
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      incremental_selection = { 
+      incremental_selection = {
         enable = true,
         keymaps = {
           node_incremental = "v",
