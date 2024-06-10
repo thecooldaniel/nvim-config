@@ -248,13 +248,18 @@ return {
             },
           },
         },
+        python = {}
       }
 
       -- Setup verible outside of Mason
       -- require('plugins.language.systemverilog').setupLsp()
 
       require'mason'.setup()
-      require("mason-nvim-dap").setup()
+      require("mason-nvim-dap").setup({
+        ensure_installed = {'python'},
+        handlers = {},
+        automatic_installation = true,
+      })
 
       require('mason-lspconfig').setup {
         handlers = {
