@@ -79,5 +79,5 @@ vim.opt.laststatus = 3
 
 
 -- Session options
-vim.o.sessionoptions="blank,curdir,folds,tabpages,terminal,winpos,winsize"
+vim.o.sessionoptions="blank,curdir,folds,tabpages,terminal,winpos,winsize,globals"
 
