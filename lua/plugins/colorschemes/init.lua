@@ -85,4 +85,11 @@ return {
     -- lazy = false,
     -- priority = 1000,
   },
+  {
+    'NLKNguyen/papercolor-theme'
+  },
+  {
+    'https://gitlab.com/protesilaos/tempus-themes-vim.git'
+  },
+  { "EdenEast/nightfox.nvim" }
 }
