@@ -43,7 +43,35 @@ return {
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
       vim.keymap.set('n', '<leader>fd', function() require("telescope").extensions.file_browser.file_browser() end, {})
       vim.keymap.set('n', '<leader>wc', function() builtin.colorscheme({enable_preview = true}) end, {})
+      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
+      vim.keymap.set('n', '<leader>bf', builtin.current_buffer_fuzzy_find, {})
       require'telescope'.setup({
+        pickers = {
+          find_files = {
+            theme = "ivy"
+          },
+          live_grep = {
+            theme = "ivy"
+          },
+          buffers = {
+            theme = "ivy",
+          },
+          help_tags = {
+            theme = "ivy",
+          },
+          file_browser = {
+            theme = "ivy",
+          },
+          colorscheme = {
+            theme = "ivy",
+          },
+          oldfiles = {
+            theme = "ivy",
+          },
+          current_buffer_fuzzy_find = {
+            theme = "ivy",
+          },
+        },
         extensions = {
           ["ui-select"] = { require'telescope.themes'.get_dropdown() },
           fzf = {
@@ -54,7 +82,8 @@ return {
             -- the default case_mode is "smart_case"
           },
           file_browser = {
-            hijack_netrw = true
+            hijack_netrw = true,
+            theme = "ivy"
           },
         }
       })
