@@ -55,6 +55,11 @@ return {
           },
           buffers = {
             theme = "ivy",
+            mappings = {
+              i = {
+                ["<c-d>"] = "delete_buffer"
+              }
+            }
           },
           help_tags = {
             theme = "ivy",
