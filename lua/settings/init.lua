@@ -100,4 +100,10 @@ vim.diagnostic.config{
   float={border=_border}
 }
 
-vim.opt.shell = 'fish'
+if(not vim.fn.has('win64')) then
+  if(vim.fn.executable('fish')) then
+    vim.opt.shell = 'fish'
+  else
+    vim.opt.shell = 'bash'
+  end
+end
