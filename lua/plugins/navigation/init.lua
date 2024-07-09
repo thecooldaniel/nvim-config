@@ -34,66 +34,54 @@ return {
       'nvim-telescope/telescope-ui-select.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
        "nvim-telescope/telescope-file-browser.nvim",
+      "debugloop/telescope-undo.nvim",
     },
     config = function()
+
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
       vim.keymap.set('n', '<leader>fd', function() require("telescope").extensions.file_browser.file_browser() end, {})
+      vim.keymap.set('n', '<leader>fu', "<cmd>Telescope undo<cr>")
       vim.keymap.set('n', '<leader>wc', function() builtin.colorscheme({enable_preview = true}) end, {})
       vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
       vim.keymap.set('n', '<leader>bf', builtin.current_buffer_fuzzy_find, {})
+
       require'telescope'.setup({
-        pickers = {
-          find_files = {
-            theme = "ivy"
-          },
-          live_grep = {
-            theme = "ivy"
-          },
-          buffers = {
-            theme = "ivy",
-            mappings = {
-              i = {
-                ["<c-d>"] = "delete_buffer"
+        defaults = require'telescope.themes'.get_ivy {
+
+          pickers = {
+            buffers = {
+              mappings = {
+                i = { ["<c-d>"] = "delete_buffer" }
               }
-            }
+            },
+
           },
-          help_tags = {
-            theme = "ivy",
-          },
-          file_browser = {
-            theme = "ivy",
-          },
-          colorscheme = {
-            theme = "ivy",
-          },
-          oldfiles = {
-            theme = "ivy",
-          },
-          current_buffer_fuzzy_find = {
-            theme = "ivy",
-          },
-        },
-        extensions = {
-          ["ui-select"] = { require'telescope.themes'.get_dropdown() },
-          fzf = {
-            fuzzy = true,                    -- false will only do exact matching
-            override_generic_sorter = true,  -- override the generic sorter
-            override_file_sorter = true,     -- override the file sorter
-            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"
-          },
-          file_browser = {
-            hijack_netrw = true,
-            theme = "ivy"
-          },
+          extensions = {
+            ["ui-select"] = { require'telescope.themes'.get_dropdown() },
+            fzf = {
+              fuzzy = true,                    -- false will only do exact matching
+              override_generic_sorter = true,  -- override the generic sorter
+              override_file_sorter = true,     -- override the file sorter
+              case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+              -- the default case_mode is "smart_case"
+            },
+            undo = {
+              theme = "ivy"
+            },
+            file_browser = {
+              hijack_netrw = true,
+              theme = "ivy"
+            },
+          }
         }
       })
 
       require'telescope'.load_extension'ui-select'
+      require'telescope'.load_extension'undo'
     end
   },
   {
