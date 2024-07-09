@@ -99,3 +99,5 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 vim.diagnostic.config{
   float={border=_border}
 }
+
+vim.opt.shell = 'fish'
