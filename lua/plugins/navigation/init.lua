@@ -51,15 +51,18 @@ return {
 
       require'telescope'.setup({
         defaults = require'telescope.themes'.get_ivy {
-
-          pickers = {
-            buffers = {
-              mappings = {
-                i = { ["<c-d>"] = "delete_buffer" }
-              }
-            },
-
+          mappings = {
+            n = {['<C-d>'] = require('telescope.actions').delete_buffer},
+            i = {['<C-d>'] = require('telescope.actions').delete_buffer}
           },
+          -- pickers = {
+          --   buffers = {
+          --     mappings = {
+          --       i = { ["<C-d>"] = "delete_buffer" }
+          --     }
+          --   },
+          -- },
+
           extensions = {
             ["ui-select"] = { require'telescope.themes'.get_dropdown() },
             fzf = {
@@ -70,7 +73,11 @@ return {
               -- the default case_mode is "smart_case"
             },
             undo = {
-              theme = "ivy"
+              side_by_side = true,
+              layout_strategy = "vertical",
+              layout_config = {
+                preview_height = 0.8,
+              },
             },
             file_browser = {
               hijack_netrw = true,
