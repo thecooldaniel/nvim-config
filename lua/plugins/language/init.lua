@@ -77,6 +77,7 @@ return {
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
           ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<right>'] = cmp.mapping.abort(),
           ['<Tab>'] = cmp.mapping.select_next_item(),
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -301,7 +302,7 @@ return {
 
       -- Include languages here
 
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'TextChanged', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
         callback = function()
           vim.defer_fn(function()
