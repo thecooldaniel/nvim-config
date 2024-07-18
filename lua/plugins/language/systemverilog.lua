@@ -23,12 +23,13 @@ function systemverilog.setupLsp()
       or lspconfutil.path.join(vim.loop.cwd(), fname)
       return root_pattern(filename) or lspconfutil.path.dirname(filename)
     end;
-    capabilites = require'cmp_nvim_lsp'.default_capabilities(),
+    format_on_save = true,
+    -- capabilites = require'cmp_nvim_lsp'.default_capabilities(),
   }
 end
 
 function systemverilog.setupLinter(lint)
-  
+
   lint.linters_by_ft = {
     systemverilog = { 'verilator' },
     verilog = { 'verilator' },

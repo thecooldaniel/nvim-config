@@ -110,6 +110,7 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
+          { name = 'codeium' },
           { name = 'orgmode' },
           { name = 'luasnip' },
           { name = 'path' },
@@ -117,6 +118,17 @@ return {
         },
       }
     end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+      })
+    end
   },
   {
     -- "williamboman/mason.nvim",
@@ -302,15 +314,15 @@ return {
 
       -- Include languages here
 
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-        group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
-        callback = function()
-          vim.defer_fn(function()
-            require('plugins.language.systemverilog').setupLinter(lint)
-            lint.try_lint()
-          end, 1)
-        end,
-      })
+      -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      --   group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
+      --   callback = function()
+      --     vim.defer_fn(function()
+      --       require('plugins.language.systemverilog').setupLinter(lint)
+      --       lint.try_lint()
+      --     end, 1)
+      --   end,
+      -- })
       -- verilator.stdin = true
     end,
   },
