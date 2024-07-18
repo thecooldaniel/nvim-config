@@ -43,10 +43,12 @@ return {
       luasnip.config.setup {}
 
       cmp.setup {
+        experimental = {
+          ghost_text = true,
+        },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
-          comp
         },
         snippet = {
           expand = function(args)
