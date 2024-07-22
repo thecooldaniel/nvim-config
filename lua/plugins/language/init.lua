@@ -308,7 +308,6 @@ return {
       'BufReadPre',
       'BufNewFile',
       'BufWritePost',
-      'TextChanged',
       'InsertLeave'
     },
     config = function()
@@ -316,15 +315,15 @@ return {
 
       -- Include languages here
 
-      -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-      --   group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
-      --   callback = function()
-      --     vim.defer_fn(function()
-      --       require('plugins.language.systemverilog').setupLinter(lint)
-      --       lint.try_lint()
-      --     end, 1)
-      --   end,
-      -- })
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+        group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
+        callback = function()
+          vim.defer_fn(function()
+            require('plugins.language.systemverilog').setupLinter(lint)
+            lint.try_lint()
+          end, 1)
+        end,
+      })
       -- verilator.stdin = true
     end,
   },
