@@ -132,6 +132,7 @@ return {
       })
     end
   },
+  { require('plugins.language.scala').setup_metals() },
   {
     -- "williamboman/mason.nvim",
     -- "williamboman/mason-lspconfig.nvim",
@@ -257,7 +258,7 @@ return {
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
-        verible = require('plugins.language.systemverilog').setupLsp(),
+        verible = require('plugins.language.systemverilog').setup_lsp(),
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -308,7 +309,6 @@ return {
       'BufReadPre',
       'BufNewFile',
       'BufWritePost',
-      'TextChanged',
       'InsertLeave'
     },
     config = function()
@@ -316,15 +316,15 @@ return {
 
       -- Include languages here
 
-      -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-      --   group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
-      --   callback = function()
-      --     vim.defer_fn(function()
-      --       require('plugins.language.systemverilog').setupLinter(lint)
-      --       lint.try_lint()
-      --     end, 1)
-      --   end,
-      -- })
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+        group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
+        callback = function()
+          vim.defer_fn(function()
+            require('plugins.language.systemverilog').setup_linter(lint)
+            lint.try_lint()
+          end, 1)
+        end,
+      })
       -- verilator.stdin = true
     end,
   },
