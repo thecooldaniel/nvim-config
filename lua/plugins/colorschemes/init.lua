@@ -79,7 +79,10 @@ return {
     "scottmckendry/cyberdream.nvim",
     config = function ()
       require'cyberdream'.setup{
-        transparent = true
+        -- transparent = true,
+        theme = {
+          variant = 'dark'
+        }
       }
     end
     -- lazy = false,
@@ -91,5 +94,6 @@ return {
   {
     'https://gitlab.com/protesilaos/tempus-themes-vim.git'
   },
-  { "EdenEast/nightfox.nvim" }
+  { "EdenEast/nightfox.nvim" },
+  { "NTBBloodbath/sweetie.nvim" }
 }

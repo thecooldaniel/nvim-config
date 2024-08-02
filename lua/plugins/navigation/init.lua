@@ -127,14 +127,19 @@ return {
     -- event = 'VimEnter', -- if you want lazy load, see below
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
+      local fills = {
+        fill = { fg='#ffffff', bg='#000000'},
+        fill_bg = {bg='#000000', fg='#3f3f3f'},
+        fill_fg = {bg='#000000', fg='#ffffff'}
+      }
       local theme = {
-        fill = 'TabLineFill',
+        fill = fills.fill,
         -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-        head = 'TabLine',
-        current_tab = 'TabLineSel',
-        tab = 'TabLine',
-        win = 'TabLine',
-        tail = 'TabLine',
+        head = fills.fill_fg,
+        current_tab = fills.fill_fg,
+        tab = fills.fill_bg,
+        win = fills.fill_fg,
+        tail = fills.fill_fg,
       }
       require('tabby').setup({
         line = function(line)
