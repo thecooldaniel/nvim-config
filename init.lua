@@ -14,6 +14,11 @@ require'keybinds'
 require'autocmd'
 
 -- #################################
+-- USER COMMANDS
+-- #################################
+require'user_commands'
+
+-- #################################
 -- PLUGIN MANAGEMENT
 -- #################################
 
