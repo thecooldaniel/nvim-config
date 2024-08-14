@@ -1,0 +1,59 @@
+" ~/.config/nvim/after/indent/systemverilog.vim
+
+" Load the default indent file
+runtime! indent/systemverilog.vim
+
+" Preserve the default b:did_indent if it exists
+let s:did_indent = exists("b:did_indent") ? b:did_indent : 0
+
+function! GetCustomSVIndent(lnum)
+  let line = getline(a:lnum)
+  let prevlnum = prevnonblank(a:lnum - 1)
+  let prevline = getline(prevlnum)
+
+  " Start with the indent of the previous line
+  let ind = indent(prevlnum)
+
+  " Module instantiation
+  if prevline =~ '^\s*\w\+\s\+#\?(' && prevline !~ ');$'
+    return 3  " Fixed indent for module instantiations
+  endif
+
+  " Port connections inside module instantiation
+  if prevline =~ '^\s*\.\w\+'
+    return 6  " Fixed indent for port connections
+  endif
+
+  " Closing parenthesis of module instantiation
+  if line =~ '^\s*);'
+    return 3  " Align with module instantiation start
+  endif
+
+  " Always block
+  if line =~ '^\s*always_\(ff\|comb\)\s*@'
+    return 0  " No indent for always blocks
+  endif
+
+  " Inside always block
+  if prevline =~ '^\s*always_\(ff\|comb\)\s*@.*begin$' || prevline =~ '^\s*else begin$'
+    return 3  " Fixed indent inside always blocks
+  endif
+
+  " Nested blocks inside always block
+  if prevline =~ '^\s*\(if\|else\)\s*.*begin$'
+    return ind + 3
+  endif
+
+  " Closing 'end'
+  if line =~ '^\s*end'
+    return ind - 3
+  endif
+
+  " Keep the indent of the previous line for other cases
+  return ind
+endfunction
+
+setlocal indentexpr=GetCustomSVIndent(v:lnum)
+
+" Restore the original b:did_indent
+let b:did_indent = s:did_indent
